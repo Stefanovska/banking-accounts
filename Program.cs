@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IUserAccountsService, UserAccountsService>();
 
 var app = builder.Build();
 

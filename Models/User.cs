@@ -11,6 +11,7 @@ namespace bank_accounts_api.Models
         public string Surname { get; set; }
         [Required]
         public Amount Balance { get; set; }
+        public List<UserAccount>? UserAccounts { get; set; }
 
         public User(string name, string surname, Amount balance)
         {
