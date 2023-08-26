@@ -9,16 +9,15 @@ namespace bank_accounts_api.Models
         public string Name { get; set; }
         [Required]
         public string Surname { get; set; }
-        [Required]
-        public Amount Balance { get; set; }
+        
+        public Amount? Balance { get; set; }
         public List<UserAccount>? UserAccounts { get; set; }
 
-        public User(string name, string surname, Amount balance)
+        public User(string name, string surname)
         {
             Id = Guid.NewGuid().ToString();
             Name = name;
             Surname = surname;
-            Balance = balance;
         }
     }
 }

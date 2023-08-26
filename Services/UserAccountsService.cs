@@ -44,9 +44,18 @@ namespace bank_accounts_api.Services
                     userAccount.Transactions = new List<Transaction>();
                 }
                 userAccount.Transactions.Add(transaction);
+
+                if (user.Balance != null)
+                {
+                    user.Balance.Value = user.Balance.Value + transaction.Amount.Value;
+                } else
+                {
+                    user.Balance = transaction.Amount;
+                }
             }
 
             user.UserAccounts.Add(userAccount);
+            
             return userAccount;
         }
 
