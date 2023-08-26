@@ -1,9 +1,12 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using bank_accounts_api.Services;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IUsersService, UsersService>();
 
 var app = builder.Build();
 
