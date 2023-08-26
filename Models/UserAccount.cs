@@ -3,9 +3,10 @@
     public class UserAccount
     {
         public string Id { get; set; }
-        public string? CustomerId { get; set; }
         public Amount InitialCredit { get; set; }
         public bool IsCurrent { get; set; }
+        public string? CustomerId { get; set; }
+        public List<Transaction>? Transactions { get; set; }
 
         public UserAccount(string customerId, Amount initialCredit, bool isCurrent)
         {

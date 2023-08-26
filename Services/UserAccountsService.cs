@@ -1,13 +1,24 @@
 ﻿using bank_accounts_api.Models;
-using bank_accounts_api.Utils;
 
 namespace bank_accounts_api.Services
 {
 	public class UserAccountsService : IUserAccountsService
 	{
+        private readonly IUsersService _usersService;
+        private readonly IUserAccountTransactionsService _userAccountTransactionsService;
+
+        public UserAccountsService(
+            IUsersService usersService,
+            IUserAccountTransactionsService userAccountTransactionsService
+        )
+        {
+            _usersService = usersService;
+            _userAccountTransactionsService = userAccountTransactionsService;
+        }
+
         public UserAccount AddAccount(UserAccount userAccount, string userId)
         {
-            User user = MemoryStorageUtility.Users.Find(u => u.Id == userId);
+            User user = _usersService.GetUser(userId);
             if (user == null)
             {
                 throw new NullReferenceException();
@@ -17,19 +28,31 @@ namespace bank_accounts_api.Services
             {
                 user.UserAccounts = new List<UserAccount>();
             }
+
             userAccount.CustomerId = userId;
             userAccount.IsCurrent = true;
             user.UserAccounts.ForEach(ua =>
             {
                 ua.IsCurrent = false;
             });
+
+            if (userAccount.InitialCredit.Value != 0)
+            {
+                Transaction transaction = _userAccountTransactionsService.CreateTransaction(userAccount.InitialCredit);
+                if (userAccount.Transactions == null)
+                {
+                    userAccount.Transactions = new List<Transaction>();
+                }
+                userAccount.Transactions.Add(transaction);
+            }
+
             user.UserAccounts.Add(userAccount);
             return userAccount;
         }
 
         public List<UserAccount> GetAccounts(string userId)
         {
-            User user = MemoryStorageUtility.Users.Find(u => u.Id == userId);
+            User user = _usersService.GetUser(userId);
             if (user == null)
             {
                 throw new NullReferenceException();

@@ -15,6 +15,18 @@ namespace bank_accounts_api.Services
         {
             return MemoryStorageUtility.Users;
         }
-	}
+
+        public User GetUser(string userId)
+        {
+            try
+            {
+                return MemoryStorageUtility.Users.Find(u => u.Id == userId);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return null;
+            }
+        }
+    }
 }
 

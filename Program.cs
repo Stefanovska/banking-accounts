@@ -8,6 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IUserAccountsService, UserAccountsService>();
+builder.Services.AddScoped<IUserAccountTransactionsService, UserAccountTransactionsService>();
 
 var app = builder.Build();
 
