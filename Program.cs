@@ -3,6 +3,7 @@
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
