@@ -22,6 +22,13 @@ public class UsersController : ControllerBase
         return _usersService.GetUsers();
     }
 
+    [HttpGet]
+    [Route("{userId}")]
+    public User GetDetails(string userId)
+    {
+        return _usersService.GetUser(userId);
+    }
+
     [HttpPost]
     public HttpResponseMessage Create([Bind("Name,Surname,Balance")] User user)
     {
