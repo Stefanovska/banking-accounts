@@ -13,6 +13,9 @@ builder.Services.AddScoped<IUserAccountTransactionsService, UserAccountTransacti
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseStaticFiles();
+
+app.UseRouting();
 
 app.UseAuthorization();
 
