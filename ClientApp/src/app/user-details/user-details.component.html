@@ -37,13 +37,20 @@
             <tr>
                 <td>ID</td>
                 <td>Initial credit</td>
+                <td>Is current</td>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let userAccount of user?.userAccounts">
-                <td>{{userAccount.id}}</td>
-                <td>{{userAccount.initialCredit.value}} {{userAccount.initialCredit.currency}}</td>
-            </tr>
+            <ng-container *ngFor="let userAccount of user?.userAccounts">
+                <tr>
+                    <td>{{userAccount.id}}</td>
+                    <td>{{userAccount.initialCredit.value}} {{userAccount.initialCredit.currency}}</td>
+                    <td>{{userAccount.isCurrent ? 'Yes' : 'No'}}</td>
+                </tr>
+                <tr *ngFor="let transaction of userAccount.transactions">
+                    <td style="padding-left: 30px">↳ Transaction: {{transaction?.amount?.value}} {{transaction?.amount?.currency}}</td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
 </ng-container>
