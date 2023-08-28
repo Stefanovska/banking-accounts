@@ -44,9 +44,18 @@ namespace bank_accounts_api.Services
                     userAccount.Transactions = new List<Transaction>();
                 }
                 userAccount.Transactions.Add(transaction);
+
+                if (user.Balance != null)
+                {
+                    user.Balance.Value = user.Balance.Value + transaction.Amount.Value;
+                } else
+                {
+                    user.Balance = transaction.Amount;
+                }
             }
 
             user.UserAccounts.Add(userAccount);
+<<<<<<< HEAD
 
             float totalBalance = 0;
             user.UserAccounts.ForEach(ua =>
@@ -70,6 +79,9 @@ namespace bank_accounts_api.Services
             user.Balance = new Amount(totalBalance, "EUR");
             _usersService.UpdateUser(user.Id, user);
 
+=======
+            
+>>>>>>> parent of c8aeea1 (feat: list all accounts in user details page)
             return userAccount;
         }
 

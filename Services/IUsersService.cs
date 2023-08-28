@@ -6,7 +6,6 @@ namespace bank_accounts_api.Services
     {
         User AddUser(User user);
         User GetUser(string userId);
-        User UpdateUser(string userId, User user);
         List<User> GetUsers();
     }
 }

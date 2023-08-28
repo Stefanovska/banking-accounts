@@ -2,14 +2,8 @@
 {
     public class Amount
     {
-        public float Value { get; set; }
         public string Currency { get; set; }
-
-        public Amount(float value, string currency)
-        {
-            Value = value;
-            Currency = currency;
-        }
+        public float Value { get; set; }
     }
 }
 

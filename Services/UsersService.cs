@@ -27,20 +27,6 @@ namespace bank_accounts_api.Services
                 return null;
             }
         }
-
-        public User UpdateUser(string userId, User user)
-        {
-            try
-            {
-                int index = MemoryStorageUtility.Users.FindIndex(u => u.Id == userId);
-                MemoryStorageUtility.Users[index] = user;
-                return MemoryStorageUtility.Users[index];
-            }
-            catch (ArgumentNullException ex)
-            {
-                return null;
-            }
-        }
     }
 }
 
