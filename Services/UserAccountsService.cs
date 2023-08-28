@@ -44,18 +44,22 @@ namespace bank_accounts_api.Services
                     userAccount.Transactions = new List<Transaction>();
                 }
                 userAccount.Transactions.Add(transaction);
-
-                if (user.Balance != null)
-                {
-                    user.Balance.Value = user.Balance.Value + transaction.Amount.Value;
-                } else
-                {
-                    user.Balance = transaction.Amount;
-                }
             }
 
             user.UserAccounts.Add(userAccount);
-            
+
+            float totalBalance = 0;
+            user.UserAccounts.ForEach(ua =>
+            {
+                ua.Transactions.ForEach(t =>
+                {
+                    totalBalance += t.Amount.Value;
+                });
+            });
+
+            user.Balance = new Amount(totalBalance, "EUR");
+            _usersService.UpdateUser(user.Id, user);
+
             return userAccount;
         }
 

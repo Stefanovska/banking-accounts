@@ -1,0 +1,49 @@
+<style>
+    table, td, th {
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    th, td {
+        padding: 15px;
+    }
+
+    h2 {
+        margin: 10px 0; 
+    }
+</style>
+
+<ng-container *ngIf="user">
+    <h3>{{user.name}} {{user.surname}}</h3>
+    <p *ngIf="user.balance">Current balance: {{user.balance.value}} {{user.balance.currency}}</p>
+</ng-container>
+
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit(accountForm)">
+    <h2>Create account</h2>
+    <input type="number" formControlName="initialCredit" placeholder="Initial credit amount" />
+    <button type="submit">Submit</button>
+</form>
+
+<ng-container *ngIf="user?.userAccounts?.length">
+    <h2>Accounts</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Initial credit</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let userAccount of user?.userAccounts">
+                <td>{{userAccount.id}}</td>
+                <td>{{userAccount.initialCredit.value}} {{userAccount.initialCredit.currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
