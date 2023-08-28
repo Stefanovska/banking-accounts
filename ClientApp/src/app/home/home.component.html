@@ -1,13 +1,48 @@
-<h1>Users</h1>
-<p>List of current users in the bank</p>
+<style>
+    table, td, th {
+        border: 1px solid #ddd;
+        text-align: left;
+    }
 
-<table>
-    <thead>
-        <tr>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Surname</td>
-            <td>Balance</td>
-        </tr>
-    </thead>
-</table>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    th, td {
+        padding: 15px;
+    }
+</style>
+
+<h1>Users</h1>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+    <p>Add user</p>
+    <input formControlName="name" placeholder="Name" />
+    <br />
+    <input formControlName="surname" placeholder="Surname" />
+    <br />
+    <button type="submit">Add</button>
+</form>
+
+<ng-container *ngIf="users.length">
+    <table>
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Surname</td>
+                <td>Balance</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+

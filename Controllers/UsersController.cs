@@ -17,29 +17,43 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<User> Get()
+    public UsersListResponseModel Get()
     {
-        return _usersService.GetUsers();
+        try
+        {
+            IEnumerable<User> users = _usersService.GetUsers();
+            return new UsersListResponseModel(users, users.Count());
+        } catch(Exception ex)
+        {
+            return new UsersListResponseModel(true);
+        }
     }
 
     [HttpGet]
     [Route("{userId}")]
-    public User GetDetails(string userId)
+    public UserResponseModel GetDetails(string userId)
     {
-        return _usersService.GetUser(userId);
+        try
+        {
+            User user = _usersService.GetUser(userId);
+            return new UserResponseModel(user, false);
+        } catch (Exception ex)
+        {
+            return new UserResponseModel(null, true);
+        }
     }
 
     [HttpPost]
-    public HttpResponseMessage Create([Bind("Name,Surname,Balance")] User user)
+    public UserResponseModel Create([Bind("Name,Surname,Balance")] User user)
     {
         if (ModelState.IsValid)
         {
             _usersService.AddUser(user);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return new UserResponseModel(user, false);
         }
         else
         {
-            return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            return new UserResponseModel(null, true);
         }
     }
 }
