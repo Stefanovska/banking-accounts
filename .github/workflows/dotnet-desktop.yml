@@ -57,6 +57,7 @@ jobs:
 
     env:
       Solution_Name: bank-accounts-api.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: bank-accounts-tests.sln
     steps:
     - name: Checkout
       uses: actions/checkout@v3
