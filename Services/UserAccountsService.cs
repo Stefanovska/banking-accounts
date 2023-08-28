@@ -51,10 +51,20 @@ namespace bank_accounts_api.Services
             float totalBalance = 0;
             user.UserAccounts.ForEach(ua =>
             {
-                ua.Transactions.ForEach(t =>
+                if (ua.Transactions != null)
                 {
-                    totalBalance += t.Amount.Value;
-                });
+                    ua.Transactions.ForEach(t =>
+                    {
+                        if (t.Amount != null)
+                        {
+                            totalBalance += t.Amount.Value;
+                        } else
+                        {
+                            totalBalance += 0;
+                        }
+                        
+                    });
+                }
             });
 
             user.Balance = new Amount(totalBalance, "EUR");

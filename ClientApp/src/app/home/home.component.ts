@@ -34,6 +34,7 @@ export class HomeComponent {
     if (form.valid) {
       this.http.post<User[]>(this.baseUrl + 'users', form.value).subscribe((result: any) => {
         this.subject$.next(result.user);
+        this.userForm.reset();
       }, (error: any) => console.error(error));
     }
   }

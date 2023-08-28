@@ -10,10 +10,12 @@ namespace bank_accounts_api.Controllers;
 public class UserAccountsController : ControllerBase
 {
     private readonly IUserAccountsService _userAccountsService;
+    private readonly IUsersService _usersService;
 
-    public UserAccountsController(IUserAccountsService userAccountsService)
+    public UserAccountsController(IUserAccountsService userAccountsService, IUsersService usersService)
     {
         _userAccountsService = userAccountsService;
+        _usersService = usersService;
     }
 
     [HttpGet]
@@ -30,22 +32,16 @@ public class UserAccountsController : ControllerBase
     }
 
     [HttpPost]
-    public HttpResponseMessage Create([Bind("InitialCredit")] UserAccount userAccount, string userId)
+    public UserResponseModel Create([Bind("InitialCredit")] UserAccount userAccount, string userId)
     {
         try
         {
-            if (ModelState.IsValid)
-            {
-                _userAccountsService.AddAccount(userAccount, userId);
-                return new HttpResponseMessage(HttpStatusCode.OK);
-            }
-            else
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+            _userAccountsService.AddAccount(userAccount, userId);
+            User user = _usersService.GetUser(userId);
+            return new UserResponseModel(user, false);
         } catch (Exception ex)
         {
-            return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            return new UserResponseModel(null, true);
         }
     }
 }

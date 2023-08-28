@@ -40,7 +40,8 @@ export class UserDetailsComponent implements OnInit {
           currency: 'EUR'
         }
       }).subscribe((result: any) => {
-        console.log(result);
+        this.user = result.user;
+        this.accountForm.reset();
       }, (error: any) => console.error(error));
     }
   }
