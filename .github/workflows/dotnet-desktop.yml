@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish
-      run: dotnet publish bank-accounts-api/bank-accounts-api.csproj -c Release -o website
+      run: dotnet publish bank-accounts-api.csproj -c Release -o website
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
       with:
