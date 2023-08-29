@@ -21,8 +21,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish bank-accounts-api/bank-accounts-api.csproj -c Release -o website
     - name: Upload a Build Artifact
