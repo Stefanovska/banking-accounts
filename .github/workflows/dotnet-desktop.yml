@@ -27,5 +27,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: website
-        path: bank-accounts-api/website/**
+        path: website/**
         if-no-files-found: error
