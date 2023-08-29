@@ -18,10 +18,9 @@
 <h1>Users</h1>
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
-    <p>Add user</p>
-    <input formControlName="name" placeholder="Name" />
+    <input type="text" formControlName="name" placeholder="Name" />
     <br />
-    <input formControlName="surname" placeholder="Surname" />
+    <input type="text" formControlName="surname" placeholder="Surname" />
     <br />
     <button type="submit">Add</button>
 </form>
@@ -30,7 +29,7 @@
     <table>
         <thead>
             <tr>
-                <td>Id</td>
+                <td>ID</td>
                 <td>Name</td>
                 <td>Surname</td>
                 <td>Balance</td>
@@ -38,11 +37,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
-                <td>{{user.id}}</td>
+                <td>
+                    <a [routerLink]="['/users/' + user.id]">{{user.id}}</a>
+                </td>
                 <td>{{user.name}}</td>
                 <td>{{user.surname}}</td>
+                <td *ngIf="user.balance">{{user.balance.value}} {{user.balance.currency}}</td>
             </tr>
         </tbody>
     </table>
 </ng-container>
-
