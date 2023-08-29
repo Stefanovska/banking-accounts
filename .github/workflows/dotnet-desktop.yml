@@ -1,4 +1,4 @@
-ame: dotnet package
+name: dotnet package
 
 on: [push]
 
