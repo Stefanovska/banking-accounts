@@ -59,7 +59,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.app-name }}
-        slot-name: staging
+        slot-name: banking-accounts-staging
         package: website
 
     - name: az cli logout
