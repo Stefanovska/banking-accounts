@@ -2,7 +2,7 @@ name: .NET
 
 env:
   app-name: "banking-accounts"
-  rg-name: "banking-accounts-rg>"
+  rg-name: "banking-accounts-rg"
 
 on:
   push:
